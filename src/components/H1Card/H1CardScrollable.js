@@ -30,11 +30,13 @@ export default function H1CardScrollable({ data }) {
   }
   const settings = {
     dots: false,
+    centerMode:true,
     infinite: true,
     speed: 500,
     prevArrows: false,
-    slidesToShow: 1,
+    slidesToShow: 1.1,
     slidesToScroll: 1,
+    // paddingLeft:20
   };
 
   return (
@@ -42,7 +44,7 @@ export default function H1CardScrollable({ data }) {
       style={{
         margin: "20px",
         borderRadius: "10px",
-        // paddingLeft: "20px",
+        paddingLeft: "5px",
       }}
     >
       <Slider {...settings}>
@@ -53,12 +55,12 @@ export default function H1CardScrollable({ data }) {
             bgColor = "#FBAF03";
           }
           return (
-            <div>
+            <div  key={index}>
               <Card
                 sx={{ display: "flex" }}
                 style={{
                   backgroundColor: bgColor,
-
+                  margin:'10px',
                   borderRadius: "10px",
                 }}
                 onClick={() => cardClick(value.url)}
