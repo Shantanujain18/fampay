@@ -19,19 +19,11 @@ function App() {
   useEffect(() => {
     api.getApiData().then((response)=>{
       setCardGroups(response.data.card_groups);
-      console.log('response.data.card_groups: ', response.data.card_groups[0].id);
-      
-      console.log(card_groups);
+
     })
   },[])
   const handleRefresh=()=>{
-    // api.getApiData().then((response)=>{
-    //   setCardGroups(response.data.card_groups);
-    //   console.log('response.data.card_groups: ');
-      
-    //   // console.log(card_groups);
-    //   return
-    // })
+    
     window.location.reload(true);
   }
   return (
@@ -39,8 +31,7 @@ function App() {
        <BrowserView>
               <h3 style={{ textAlign: "center" }}>
                 Website only supported for mobile. Please inspect the website and refresh for the same or view in mobile.
-                {/* {card_groups[0].id} */}
-                {/* {console.log('card_groups[0].id: ', card_groups[0].id);} */}
+                
               </h3>
 
         </BrowserView>
@@ -49,7 +40,7 @@ function App() {
         <PullToRefresh onRefresh={handleRefresh}>
         {
           card_groups.map((value,index)=>{
-            console.log(value.design_type);
+           
             switch (value.design_type) {
               case "HC6":
                

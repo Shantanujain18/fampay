@@ -28,7 +28,7 @@ export default function H6Card({data}) {
       margin:"20px",
         borderRadius: "12px", 
       }}>
-       {console.log(data)}
+      
        <Slider {...settings}>
         {
           data.cards.map((value,index)=>{

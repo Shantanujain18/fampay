@@ -42,7 +42,7 @@ export default function H5Card({data}) {
         {
           data.cards.map((value,index)=>{
            
-            console.log(value);
+           
             return  <Card sx={{ display: 'flex' }}  style={{
               margin:"20px",
                 borderRadius: "12px", 

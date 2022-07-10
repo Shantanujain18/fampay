@@ -46,7 +46,7 @@ export default function H1CardScrollable({data}) {
       borderRadius: "10px",
       // paddingLeft: "20px",
     }}>
- {console.log(data.cards)}
+ 
 <Slider {...settings}>
   {
     data.cards.map((value,index)=>{

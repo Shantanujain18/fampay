@@ -24,7 +24,7 @@ export default function H3Card({data}) {
   const [statedata, setdata] = useState([])
   const [isVisible, setIsVisible] = useState();
   const bind = useLongPress((title) => {
-    console.log('Long pressed!');
+   
     swal("Do you want this card?", {
       buttons: {
         cancel: "Cancel",
