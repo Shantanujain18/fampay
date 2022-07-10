@@ -23,97 +23,59 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 
-export default function H1Card() {
+export default function H1Card({data}) {
   const theme = useTheme();
+  function cardClick(url){
+    window.open(url,'_blank')
+    
+  }
 
   return (
     <div >
- <Card sx={{ display: 'flex' }}  style={{
-        backgroundColor: "#FBAF03",
-        margin: "20px",
-        borderRadius: "10px",
-        paddingLeft: "20px",
-      }}>
-        <CardContent sx={{ flex: '  0 auto' }}>
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <Avatar alt="Remy Sharp" src={Group} />
-       
-       
-      </Box>
-         
-        </CardContent>
-     
-        <CardContent sx={{ flex: '1 0 auto' }}>
-          <Typography >
-            Simple Card Content
-          </Typography>
-          <Typography variant="subtitle1" color="text.secondary" >
-            Mac Miller
-          </Typography>
-        </CardContent>
-      
-    </Card>
     <Box sx={{ width: '100%' }} style={{
        
         margin: "20px",
         borderRadius: "10px",
       }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} >
-        <Grid item xs={5} >
-        <Item style={{padding:0}}>
-          <Card sx={{ display: 'flex' }}  style={{
-        backgroundColor: "#FBAF03",
+      
+      { data.cards.map((value,index)=>{
+          var bgColor = value.bg_color;
        
-      }}>
-        <CardContent >
-        <Box >
-        <Avatar alt="Remy Sharp" src={Group}  sx={{ width: 28, height: 28 }} />
-       
-       
-      </Box>
+          if(index == 1){
+            bgColor = "#FBAF03";
+          }
+            return <Grid item xs={5} onClick={()=>cardClick(value.url)}>
+        
+            <Item style={{padding:0}}>
+              <Card sx={{ display: 'flex' }}  style={{
+            backgroundColor:bgColor,
+           
+          }}>
+            <CardContent >
+            <Box >
+            <Avatar alt="Remy Sharp" src={value.icon.image_url}  sx={{ width: 28, height: 28 }} />
+           
+           
+          </Box>
+             
+            </CardContent>
          
-        </CardContent>
-     
-        <CardContent  style={{padding:0, paddingTop:"10px",}}>
-          <Typography >
-            Transaction
-          </Typography>
-          <Typography variant="subtitle1" color="text.secondary" >
-            View All txn
-          </Typography>
-        </CardContent>
-      
-    </Card>
-          </Item>
-        </Grid>
-        <Grid item xs={5}>
-          <Item style={{padding:0}}>
-          <Card sx={{ display: 'flex' }}  style={{
-        backgroundColor: "#FBAF03",
+            <CardContent  style={{padding:0, paddingTop:"10px",}}>
+              <Typography >
+              {value.title}
+              </Typography>
+              <Typography variant="subtitle1" color="text.secondary" >
+              {value.name}
+              </Typography>
+            </CardContent>
+          
+        </Card>
+              </Item>
+            </Grid>
+          })}
+        
        
-      }}>
-        <CardContent >
-        <Box >
-        <Avatar alt="Remy Sharp" src={Group}  sx={{ width: 28, height: 28 }} />
-       
-       
-      </Box>
-         
-        </CardContent>
-     
-        <CardContent  style={{padding:0, paddingTop:"10px"}}>
-          <Typography >
-            Transaction
-          </Typography>
-          <Typography variant="subtitle1" color="text.secondary" >
-            View All txn
-          </Typography>
-        </CardContent>
-      
-    </Card>
-          </Item>
-        </Grid>
-      
       </Grid>
     </Box>
     

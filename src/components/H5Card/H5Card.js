@@ -8,37 +8,63 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Group from "../../assets/Gorilla.jpeg"
-
-export default function H6Card() {
+import { useEffect } from 'react';
+import Slider from "react-slick";
+export default function H5Card({data}) {
   const theme = useTheme();
+  // const [bgImage, setbgImage] = useState("")
+  useEffect(() => {
+    
 
-  return (
-    <Card sx={{ display: 'flex' }}  style={{
-      
-      backgroundImage: `url(${Group})`,
-      backgroundPosition: 'center',
-      backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat',
-        margin: "20px",
-        borderRadius: "10px",
-        paddingLeft: "20px",
-      }}>
-        {/* <CardContent sx={{ flex: '  0 auto' }}>
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-     <img src={Group} height="150px" width="100px"/>
-       
-       
-      </Box>
-         
-        </CardContent> */}
    
-      <CardContent sx={{ flex: '1 0 auto' }} style={{paddingTop:"100px", hidden:"true"}}>
-          <Typography component="div" style={{fontWeight:"bold"}} >
-            .
-          </Typography>
-         
-        </CardContent>
-     
-    </Card>
+  }, [])
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
+  function cardClick(url){
+    window.open(url,'_blank')
+    
+  }
+  return (
+    <div  style={{
+      margin:"20px",
+        borderRadius: "12px", 
+      }}>
+
+    
+   
+    <Slider {...settings}>
+        {
+          data.cards.map((value,index)=>{
+           
+            console.log(value);
+            return  <Card sx={{ display: 'flex' }}  style={{
+              margin:"20px",
+                borderRadius: "12px", 
+              }}
+              key={index}
+
+              onClick={()=>cardClick(value.url)}
+              >
+               
+           
+              <CardContent sx={{ flex: '1 0 auto' }} style={{padding:0}}>
+                  <img component="div" style={{ borderRadius:"12px",
+    width: "100%",
+    objectFit: "contain"}} src={value.bg_image.image_url}/>
+                 
+                </CardContent>
+             
+            </Card>
+        
+          })
+        } 
+    </Slider>
+    </div>
   );
 }

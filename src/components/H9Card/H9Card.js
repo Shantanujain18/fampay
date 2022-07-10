@@ -14,8 +14,8 @@ import Group from "../../assets/Clock.png";
 import Group1 from "../../assets/History.png";
 import Group2 from "../../assets/Rewards.png";
 
-export default class H9Card extends Component {
-  render() {
+export  default function H9Card({data})  {
+ 
     var settings = {
       dots: false,
       infinite: false,
@@ -61,38 +61,22 @@ export default class H9Card extends Component {
        
           margin: "20px",
           borderRadius: "10px",
-          // paddingLeft: "20px",
+          paddingLeft: "20px",
         }}>
-        
         <Slider {...settings}>
-          <div  >
-            
-                <img src={Group} height="100px" />
-              
-          </div>
-          <div>
-          <img src={Group1} height="100px" />
-          </div>
-          <div>
-          <img src={Group2} height="100px" />
-          </div>
-          <div>
-            <h3>4</h3>
-          </div>
-          <div>
-            <h3>5</h3>
-          </div>
-          <div>
-            <h3>6</h3>
-          </div>
-          <div>
-            <h3>7</h3>
-          </div>
-          <div>
-            <h3>8</h3>
-          </div>
+            {
+              data.cards.map((value,index)=>{
+                return <div style={{
+      
+                  // paddingLeft:"5px"
+              }}>
+                <a href={value.url} target="_blank"><img src={value.bg_image.image_url} height="100px"  /></a>
+                </div>
+              })
+            }
+         
         </Slider>
       </div>
     );
-  }
+  
 }

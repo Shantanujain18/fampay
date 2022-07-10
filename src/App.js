@@ -4,29 +4,78 @@ import './App.css';
 import NavBar from './components/Navbar';
 import { BrowserView,MobileView } from 'react-device-detect';
 import H3Card from './components/H3Card/H3Card';
+
 import H6Card from './components/H6Card/H6Card';
 import H5Card from './components/H5Card/H5Card';
 import H9Card from './components/H9Card/H9Card';
 import H1Card from './components/H1Card/H1Card';
+import H1CardScrollable from './components/H1Card/H1CardScrollable';
+import api from './apis/api';
+import { useEffect, useState } from 'react';
+import PullToRefresh from 'react-simple-pull-to-refresh';
 function App() {
+  const [card_groups,setCardGroups] = useState([])
+  
+  useEffect(() => {
+    api.getApiData().then((response)=>{
+      setCardGroups(response.data.card_groups);
+      console.log('response.data.card_groups: ', response.data.card_groups[0].id);
+      
+      console.log(card_groups);
+    })
+  },[])
+  const handleRefresh=()=>{
+    // api.getApiData().then((response)=>{
+    //   setCardGroups(response.data.card_groups);
+    //   console.log('response.data.card_groups: ');
+      
+    //   // console.log(card_groups);
+    //   return
+    // })
+    window.location.reload(true);
+  }
   return (
     <div className="App">
        <BrowserView>
               <h3 style={{ textAlign: "center" }}>
-                This website is currently supported only for mobile devices.
-                Please switch to a mobile device or simulate one using inspect
-                element to view the same.
+                Website only supported for mobile. Please inspect the website and refresh for the same or view in mobile.
+                {/* {card_groups[0].id} */}
+                {/* {console.log('card_groups[0].id: ', card_groups[0].id);} */}
               </h3>
+
         </BrowserView>
         <MobileView>
         <NavBar></NavBar>
-      <H3Card></H3Card>
-      <H6Card></H6Card>
-      <H5Card></H5Card>
+        <PullToRefresh onRefresh={handleRefresh}>
+        {
+          card_groups.map((value,index)=>{
+            console.log(value.design_type);
+            switch (value.design_type) {
+              case "HC6":
+               
+                return  <H6Card data={value}></H6Card>
+               
+              case "HC9":
+                return <H9Card data={value}></H9Card>;
+              case "HC1":
+                if(value.is_scrollable){
+                  return <H1CardScrollable data={value}></H1CardScrollable>
+                }else{
+                  return <H1Card data={value}></H1Card>;
+                }
+               
+              case "HC5":
+                return <H5Card data={value}></H5Card>;
+                case "HC3":
+                  return <H3Card data={value}></H3Card>;
+              default:
+                break;
+            }
+          })
+        }
+        </PullToRefresh>
+     
       
-      <H5Card></H5Card>
-      <H9Card></H9Card>
-      <H1Card></H1Card>
         </MobileView>
         
       
