@@ -69,7 +69,7 @@ export default function H6Card({ data }) {
       <Slider {...settings}>
         {data.cards.map((value, index) => {
           return (
-            <div>
+            <div  key={index}>
               {/* {console.log(value)} */}
               <Card
                 sx={{ display: "flex" }}
@@ -77,6 +77,7 @@ export default function H6Card({ data }) {
                   borderRadius: "10px",
                   // paddingLeft: "20px",
                 }}
+               
                 onClick={() => cardClick(value.url)}
               >
                 <CardContent sx={{ flex: "0  0 auto" }}>

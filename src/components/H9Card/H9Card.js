@@ -65,11 +65,7 @@ export default function H9Card({ data }) {
         {data.cards.map((value, index) => {
           return (
             <div
-              style={
-                {
-                  // paddingLeft:"5px"
-                }
-              }
+             key={index}
             >
               <a href={value.url} target="_blank">
                 <img src={value.bg_image.image_url} height="100px" />

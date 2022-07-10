@@ -45,7 +45,7 @@ export default function H1Card({ data }) {
               bgColor = "#FBAF03";
             }
             return (
-              <Grid item xs={5} onClick={() => cardClick(value.url)}>
+              <Grid item xs={5} onClick={() => cardClick(value.url)} key={index}>
                 <Item style={{ padding: 0 }}>
                   <Card
                     sx={{ display: "flex" }}

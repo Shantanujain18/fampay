@@ -142,7 +142,7 @@ export default function H3Card({ data }) {
       {isVisible ? (
         
         data.cards.map((value,key)=>{
-         return <div><Card
+         return <div key={key}><Card
           sx={{ minWidth: 275 }}
           style={{
             backgroundImage: `url(${bgImage})`,
