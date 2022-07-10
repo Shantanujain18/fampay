@@ -22,6 +22,43 @@ export default function H6Card({ data }) {
   function cardClick(url) {
     window.open(url, "_blank");
   }
+  const generateStyles = (entity) => {
+    // generates an array of text including "{}"
+    let textArray=  entity.text.split(" ");
+
+    let bracketIndex=  0;
+
+    // iterating over all the highlighted entities
+    entity.entities.forEach((entityItem, i) => {
+      let style = "";
+
+      // creates the style for the highlighted entity
+      Object.keys(entityItem).forEach((attribute) => {
+        if (attribute !== "text") {
+          // @ts-ignore
+          style += `${attribute}: ${entityItem[attribute]};`;
+        }
+      });
+
+      // iterating over the text array and replaces the "{}" with the styled text
+      textArray.forEach((textItem, currentIndex) => {
+        if (textItem.includes("{}") && i === bracketIndex) {
+          const finalHTML = textItem.replace(
+            "{}",
+            `<span style="${style}">${entityItem["text"]}</span>`
+          );
+          textArray[currentIndex] = finalHTML;
+          bracketIndex += 1;
+        }
+      });
+    });
+
+    return textArray.join(" ");
+  };
+  
+  const createMarkUp = (text) => {
+    return { __html: text };
+  };
   return (
     <div
       style={{
@@ -33,6 +70,7 @@ export default function H6Card({ data }) {
         {data.cards.map((value, index) => {
           return (
             <div>
+              {console.log(value)}
               <Card
                 sx={{ display: "flex" }}
                 style={{
@@ -53,7 +91,14 @@ export default function H6Card({ data }) {
 
                 <CardContent sx={{ flex: "1 0 auto" }}>
                   <Typography component="div" style={{ fontWeight: "bold" }}>
-                    {value.title}
+                  <div
+            className="heading"
+            dangerouslySetInnerHTML={createMarkUp(
+              value.formatted_title
+                ? generateStyles(value.formatted_title)
+                : value.title
+            )}
+          />
                   </Typography>
                 </CardContent>
                 <IconButton aria-label="next">
