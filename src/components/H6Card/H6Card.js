@@ -70,7 +70,7 @@ export default function H6Card({ data }) {
         {data.cards.map((value, index) => {
           return (
             <div>
-              {console.log(value)}
+              {/* {console.log(value)} */}
               <Card
                 sx={{ display: "flex" }}
                 style={{
