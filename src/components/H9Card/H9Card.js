@@ -14,69 +14,70 @@ import Group from "../../assets/Clock.png";
 import Group1 from "../../assets/History.png";
 import Group2 from "../../assets/Rewards.png";
 
-export  default function H9Card({data})  {
- 
-    var settings = {
-      dots: false,
-      infinite: false,
-      speed: 500,
-      slidesToShow: 4,
-      slidesToScroll: 4,
-      initialSlide: 0,
-      prevArrow: false,
-      nextArrow: false,
-      swipeToSlide: true,
-      responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3,
-           
-          },
-        },
-        {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2,
-            initialSlide: 2,
-          },
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            prevArrow: false,
+export default function H9Card({ data }) {
+  var settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    prevArrow: false,
     nextArrow: false,
-    arrows: false
-          },
+    swipeToSlide: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
         },
-      ],
-    };
-    return (
-      <div  style={{
-      
-       
-          margin: "20px",
-          borderRadius: "10px",
-          paddingLeft: "20px",
-        }}>
-        <Slider {...settings}>
-            {
-              data.cards.map((value,index)=>{
-                return <div style={{
-      
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          prevArrow: false,
+          nextArrow: false,
+          arrows: false,
+        },
+      },
+    ],
+  };
+  return (
+    <div
+      style={{
+        margin: "20px",
+        borderRadius: "10px",
+        paddingLeft: "20px",
+      }}
+    >
+      <Slider {...settings}>
+        {data.cards.map((value, index) => {
+          return (
+            <div
+              style={
+                {
                   // paddingLeft:"5px"
-              }}>
-                <a href={value.url} target="_blank"><img src={value.bg_image.image_url} height="100px"  /></a>
-                </div>
-              })
-            }
-         
-        </Slider>
-      </div>
-    );
-  
+                }
+              }
+            >
+              <a href={value.url} target="_blank">
+                <img src={value.bg_image.image_url} height="100px" />
+              </a>
+            </div>
+          );
+        })}
+      </Slider>
+    </div>
+  );
 }
